@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kod Paylaşım & Önizleme</title>
+    <title>CODE VAULT // Güvenli Kod Paylaşımı</title>
     <style>
         :root {
-            --bg-main: #0a0a0f;
-            --bg-panel: #13131f;
-            --accent: #00ffcc;
-            --accent-hover: #00cca3;
-            --text: #e2e8f0;
-            --border: #26263b;
+            --bg-dark: #07070b;
+            --bg-panel: #101018;
+            --bg-header: #151520;
+            --neon-cyan: #00f3ff;
+            --neon-purple: #a855f7;
+            --neon-green: #10b981;
+            --text-main: #f1f5f9;
+            --text-muted: #64748b;
+            --border-color: #222233;
         }
 
         * {
@@ -21,167 +24,243 @@
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            height: 100vh;
             overflow: hidden;
         }
 
+        /* Üst Bar */
         header {
-            background-color: var(--bg-panel);
-            border-bottom: 1px solid var(--border);
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
             padding: 14px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
             z-index: 10;
         }
 
-        .brand {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--accent);
-            letter-spacing: 1px;
+        .logo-area {
             display: flex;
             align-items: center;
-            gap: 10px;
-            text-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+            gap: 14px;
         }
 
-        .stats {
-            font-size: 0.85rem;
-            color: #8892b0;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 4px 10px;
-            border-radius: 6px;
-        }
-
-        .actions {
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             display: flex;
-            gap: 12px;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge {
+            background: rgba(0, 243, 255, 0.08);
+            border: 1px solid rgba(0, 243, 255, 0.25);
+            color: var(--neon-cyan);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: monospace;
+        }
+
+        /* Butonlar */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         button {
-            background-color: #1e1e30;
-            color: var(--text);
-            border: 1px solid var(--border);
-            padding: 9px 16px;
-            border-radius: 6px;
-            cursor: pointer;
+            background: #1c1c2b;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 10px 16px;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
+            font-size: 0.88rem;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            transition: all 0.2s ease;
         }
 
         button:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-1px);
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 243, 255, 0.15);
         }
 
-        button.primary {
-            background-color: var(--accent);
-            color: #0a0a0f;
-            border-color: var(--accent);
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.25);
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-cyan), #00a8ff);
+            color: #050508;
+            border: none;
+            font-weight: 700;
         }
 
-        button.primary:hover {
-            background-color: var(--accent-hover);
-            color: #0a0a0f;
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.45);
+        .btn-primary:hover {
+            color: #050508;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
         }
 
+        .btn-pack {
+            background: rgba(168, 85, 247, 0.15);
+            border-color: var(--neon-purple);
+            color: #d8b4fe;
+        }
+
+        .btn-pack:hover {
+            background: var(--neon-purple);
+            color: #fff;
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+        }
+
+        /* Ana Editör Alanı */
         main {
             flex: 1;
             display: flex;
+            padding: 16px;
+            gap: 16px;
+            overflow: hidden;
             position: relative;
+        }
+
+        .code-container {
+            flex: 1;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        .code-header {
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .window-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+        }
+        .dot.r { background: #ef4444; }
+        .dot.y { background: #f59e0b; }
+        .dot.g { background: #10b981; }
+
+        .editor-body {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .line-numbers {
+            background: rgba(0, 0, 0, 0.25);
+            color: #475569;
+            padding: 16px 12px;
+            text-align: right;
+            font-family: 'Consolas', 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            user-select: none;
+            border-right: 1px solid var(--border-color);
+            min-width: 55px;
             overflow: hidden;
         }
 
-        .editor-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 16px;
-        }
-
         textarea {
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-panel);
-            color: #a5b4fc;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
-            font-family: 'Consolas', 'Fira Code', 'Monaco', monospace;
+            flex: 1;
+            background: transparent;
+            color: #e2e8f0;
+            border: none;
+            padding: 16px;
+            font-family: 'Consolas', 'Fira Code', monospace;
             font-size: 14px;
             line-height: 1.6;
             resize: none;
             outline: none;
             white-space: pre;
-            overflow-wrap: normal;
-            overflow-x: auto;
+            overflow: auto;
+            tab-size: 4;
         }
 
-        textarea:focus {
-            border-color: var(--accent);
-        }
-
-        #previewModal {
+        /* Canlı Önizleme Penceresi */
+        #previewOverlay {
             position: absolute;
-            inset: 0;
-            background: #ffffff;
+            inset: 16px;
+            background: var(--bg-panel);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 12px;
             display: none;
             flex-direction: column;
-            z-index: 20;
+            overflow: hidden;
+            z-index: 30;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.9);
         }
 
-        .preview-bar {
-            background: var(--bg-panel);
-            padding: 10px 24px;
+        .preview-top {
+            background: var(--bg-header);
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .preview-bar span {
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 0.95rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
         iframe {
             flex: 1;
+            background: #fff;
             border: none;
             width: 100%;
             height: 100%;
         }
 
+        /* Bildirim Kutusu */
         .toast {
             position: fixed;
             bottom: 24px;
             right: 24px;
-            background: var(--accent);
-            color: #0a0a0f;
-            padding: 12px 24px;
-            border-radius: 8px;
+            background: var(--neon-green);
+            color: #050508;
+            padding: 14px 24px;
+            border-radius: 10px;
             font-weight: 700;
-            box-shadow: 0 5px 25px rgba(0, 255, 204, 0.4);
-            transform: translateY(120px);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 50;
+            box-shadow: 0 5px 25px rgba(16, 185, 129, 0.4);
+            transform: translateY(150px);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 100;
         }
 
-        .toast.show {
+        .toast.active {
             transform: translateY(0);
         }
     </style>
@@ -189,21 +268,59 @@
 <body>
 
     <header>
-        <div style="display: flex; align-items: center; gap: 15px;">
-            <div class="brand"></> CODE SHARE</div>
-            <div class="stats" id="codeStats">0 satır</div>
+        <div class="logo-area">
+            <div class="logo">⚡ CODE VAULT</div>
+            <div class="badge" id="statsBadge">0 Satır | 0 KB</div>
         </div>
-        <div class="actions">
-            <button onclick="openPreview()">👁️ Canlı Önizleme</button>
-            <button onclick="downloadHTML()">💾 .HTML İndir</button>
-            <button class="primary" onclick="copyCode()">📋 Kodu Kopyala</button>
+        <div class="btn-group">
+            <button class="btn-pack" onclick="packAndDownload()" title="Kodu kutuya yapıştırıp buna basarsan, kodları içine şifreleyip hatasız yeni bir site olarak indirir!">
+                📦 Kodu İçine Göm & Paylaşım Dosyası İndir
+            </button>
+            <button onclick="togglePreview()">👁️ Canlı Önizleme</button>
+            <button onclick="downloadRawHTML()">💾 .HTML Olarak İndir</button>
+            <button class="btn-primary" onclick="copyToClipboard()">📋 Kodu Kopyala</button>
         </div>
     </header>
 
     <main>
-        <div class="editor-wrapper">
-            <!-- ARKADAŞINA VERECEĞİN UZUN KODU AŞAĞIDAKİ TEXTAREA İÇİNE YAPIŞTIR -->
-            <textarea id="codeArea" readonly spellcheck="false"><!DOCTYPE html>
+        <div class="code-container">
+            <div class="code-header">
+                <div class="window-dots">
+                    <div class="dot r"></div>
+                    <div class="dot y"></div>
+                    <div class="dot g"></div>
+                </div>
+                <span>paylasilan_site_kodu.html (İstediğin kodu buraya yapıştırabilirsin)</span>
+                <span id="statusText" style="color: var(--neon-cyan);">Hazır</span>
+            </div>
+            <div class="editor-body">
+                <div class="line-numbers" id="lineNumbers">1</div>
+                <textarea id="codeViewer" spellcheck="false" placeholder="Uzun HTML kodunu buraya yapıştır..."></textarea>
+            </div>
+        </div>
+
+        <!-- Önizleme Ekranı -->
+        <div id="previewOverlay">
+            <div class="preview-top">
+                <span style="color: var(--neon-cyan); font-weight: 700;">🌐 Canlı Site Önizlemesi</span>
+                <button onclick="togglePreview()" style="padding: 6px 14px;">❌ Kapat</button>
+            </div>
+            <iframe id="previewFrame"></iframe>
+        </div>
+    </main>
+
+    <div class="toast" id="toastMsg">✅ İşlem Başarılı!</div>
+
+
+    <!-- ========================================================================= -->
+    <!-- 👇👇👇 1. YÖNTEM: KODUNU DİREKT BURAYA YAPIŞTIRMAK İSTERSEN 👇👇👇       -->
+    <!-- Aşağıdaki iki script etiketi arasına istediğin kadar uzun HTML kodu koy.  -->
+    <!-- NOT: Eğer hiç kodla uğraşmak istemiyorsan burayı boş bırak,               -->
+    <!-- siteyi tarayıcıda açıp ekrandaki kutuya yapıştır ve üstteki mor renkli    -->
+    <!-- "📦 Kodu İçine Göm" butonuna bas! O senin yerine hatasız gömer.          -->
+    <!-- ========================================================================= -->
+    <script id="PAYLASILACAK_KOD_ALANI" type="text/plain">
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -2284,9 +2401,135 @@
         }
     </script>
 </body>
-</html><!DOCTYPE html>
-<html>
-<head>
-    <title>Örnek Site</title>
-</head>
-<body style="background:#111; color:#fff; text
+</html>
+    </script>
+    <!-- ========================================================================= -->
+    <!-- 👆👆👆 KOD YAPIŞTIRMA ALANI BURADA BİTİYOR (ALT TARAFA DOKUNMA) 👆👆👆   -->
+    <!-- ========================================================================= -->
+
+
+    <script>
+        // Şifreli (Hatasız Base64) Kod Deposu - Otomatik Gömücü burayı doldurur
+        const ENCODED_STORAGE = "";
+
+        const codeViewer = document.getElementById('codeViewer');
+        const lineNumbers = document.getElementById('lineNumbers');
+        const statsBadge = document.getElementById('statsBadge');
+
+        function initCode() {
+            if (ENCODED_STORAGE !== "") {
+                // Eğer Base64 ile paketlenmişse %100 hatasız çöz
+                try {
+                    const bytes = Uint8Array.from(atob(ENCODED_STORAGE), c => c.charCodeAt(0));
+                    codeViewer.value = new TextDecoder('utf-8').decode(bytes);
+                } catch (e) {
+                    console.error("Çözme hatası:", e);
+                }
+            } else {
+                // Manuel yapıştırılan alanı oku
+                const rawBlock = document.getElementById('PAYLASILACAK_KOD_ALANI');
+                if (rawBlock) {
+                    codeViewer.value = rawBlock.innerHTML.trim();
+                }
+            }
+            updateUI();
+        }
+
+        function updateUI() {
+            const code = codeViewer.value;
+            const lines = code.split('\n').length;
+            const sizeKB = (new Blob([code]).size / 1024).toFixed(1);
+
+            statsBadge.textContent = `${lines} Satır | ${sizeKB} KB`;
+
+            // Satır numaralarını oluştur (Performans için maksimum 5000 satır gösterimi)
+            const maxLines = Math.min(lines, 5000);
+            let numHTML = '';
+            for (let i = 1; i <= maxLines; i++) {
+                numHTML += i + '<br>';
+            }
+            lineNumbers.innerHTML = numHTML;
+        }
+
+        // Kaydırma senkronizasyonu
+        codeViewer.addEventListener('scroll', () => {
+            lineNumbers.scrollTop = codeViewer.scrollTop;
+        });
+
+        codeViewer.addEventListener('input', updateUI);
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastMsg');
+            toast.textContent = msg;
+            toast.classList.add('active');
+            setTimeout(() => toast.classList.remove('active'), 2800);
+        }
+
+        function copyToClipboard() {
+            navigator.clipboard.writeText(codeViewer.value).then(() => {
+                showToast("✅ Tüm kod panoya kopyalandı!");
+            });
+        }
+
+        function downloadRawHTML() {
+            const blob = new Blob([codeViewer.value], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'kodlar.html';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast("💾 Kodlar .HTML olarak indirildi!");
+        }
+
+        function togglePreview() {
+            const overlay = document.getElementById('previewOverlay');
+            const frame = document.getElementById('previewFrame');
+            if (overlay.style.display === 'flex') {
+                overlay.style.display = 'none';
+                frame.srcdoc = '';
+            } else {
+                frame.srcdoc = codeViewer.value;
+                overlay.style.display = 'flex';
+            }
+        }
+
+        // %100 HATASIZ KOD GÖMÜCÜ (Kodu Base64'e çevirip kendi içine gömer)
+        function packAndDownload() {
+            const currentCode = codeViewer.value;
+            if (!currentCode.trim()) {
+                showToast("⚠️ Önce kutuya bir kod yapıştır!");
+                return;
+            }
+
+            // UTF-8 uyumlu Base64 şifreleme (Hiçbir HTML/JS etiketi bozulmaz!)
+            const utf8Bytes = new TextEncoder().encode(currentCode);
+            let binaryStr = "";
+            for (let i = 0; i < utf8Bytes.length; i++) {
+                binaryStr += String.fromCharCode(utf8Bytes[i]);
+            }
+            const base64Data = btoa(binaryStr);
+
+            // Mevcut sayfanın kaynağını al ve içine Base64 olarak göm
+            let pageSource = document.documentElement.outerHTML;
+            pageSource = pageSource.replace(
+                /const ENCODED_STORAGE = ".*?";/,
+                `const ENCODED_STORAGE = "${base64Data}";`
+            );
+
+            const finalHTML = "<!DOCTYPE html>\n" + pageSource;
+            const blob = new Blob([finalHTML], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'hazir_kod_sitesi.html';
+            a.click();
+            URL.revokeObjectURL(url);
+
+            showToast("📦 Kodlar içine şifrelendi ve hazır site indirildi!");
+        }
+
+        initCode();
+    </script>
+</body>
+</html>
